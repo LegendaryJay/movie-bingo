@@ -87,9 +87,8 @@ function toggleMark() {
 </script>
 
 <style>
-/* Make sure .text-center or another container class has the correct positioning */
 .cell-container {
-  position: relative; /* This ensures that your absolute positioning works as expected */
+  position: relative;
 }
 
 .overlay {
@@ -99,6 +98,6 @@ function toggleMark() {
   right: 0;
   bottom: 0;
   cursor: pointer;
-  z-index: 2; /* Make sure this is above everything else in the .cell-container */
+  z-index: 2;
 }
 </style>

@@ -15,10 +15,12 @@
       </div>
     </div>
   </q-card>
+  <edit-font></edit-font>
 </template>
 
 <script setup>
 import BingoCell from "./BingoCell.vue";
+import EditFont from "./EditFont.vue";
 import { computed } from "vue";
 
 const props = defineProps({
@@ -47,10 +49,10 @@ const props = defineProps({
           backgroundColor: "#16213E",
           textSize: "16px",
           textColor: "#E0FBFC",
-          markerAlpha: 0.6, //0-1
+          markerAlpha: 0.6,
           markerColor: "teal",
-          markerOffset: 0.6, //0-1
-          markerSize: 0.7, //0-1
+          markerOffset: 0.6,
+          markerSize: 0.65,
         },
       },
       content: {
