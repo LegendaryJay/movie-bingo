@@ -1,5 +1,5 @@
 <template>
-  <q-card flat class="edit-card">
+  <q-card flat class="edit-card q-pa-md q-mb-md">
     <div>
       {{ title }}
     </div>
@@ -19,6 +19,6 @@ const props = defineProps({
 </script>
 <style lang="scss" scoped>
 .edit-card {
-  background-color: #f8f8ff;
+  background-color: #f0f0ff;
 }
 </style>

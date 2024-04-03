@@ -1,8 +1,9 @@
 <template>
   <edit-card>
-    <div>
+    <div class="row justify-between q-pa-sm">
       <q-btn
         flat
+        dense
         :style="{ color: settings.fontColor, fill: '#ff0000' }"
         icon="format_color_text"
       >
@@ -12,6 +13,7 @@
       </q-btn>
       <q-btn
         flat
+        dense
         :style="{ color: settings.backgroundColor }"
         icon="format_color_fill"
       >
@@ -24,9 +26,11 @@
       <PressBtn icon="format_underline" v-model="settings.underline">
       </PressBtn>
     </div>
-    <div class="row">
+    <div class="row q-pa-sm justify-between">
       <q-select
-        class="col-9"
+        class="col-8"
+        filled
+        dense
         label="Font"
         :options="fontOptions"
         v-model="settings.font"
@@ -46,6 +50,7 @@
         </template>
       </q-select>
       <q-input
+        dense
         class="col-3"
         type="number"
         label="Font Size"
@@ -57,9 +62,9 @@
 
 <script setup>
 import { ref, watch } from "vue";
-import EditCard from "./EditCard.vue";
-import PressBtn from "./PressBtn.vue";
 
+import PressBtn from "../PressBtn.vue";
+import EditCard from "./EditCard.vue";
 const fontSelect = ref(null);
 
 const props = defineProps({

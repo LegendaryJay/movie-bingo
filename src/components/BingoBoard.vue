@@ -15,12 +15,10 @@
       </div>
     </div>
   </q-card>
-  <edit-font></edit-font>
 </template>
 
 <script setup>
 import BingoCell from "./BingoCell.vue";
-import EditFont from "./EditFont.vue";
 import { computed } from "vue";
 
 const props = defineProps({

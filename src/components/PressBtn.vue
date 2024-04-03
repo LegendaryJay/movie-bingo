@@ -2,6 +2,7 @@
   <q-btn
     :style="`--button-color: ${props.color};`"
     flat
+    dense
     :class="{
       'active-button': props.modelValue,
       'inactive-button': !props.modelValue,
@@ -26,17 +27,17 @@ const props = defineProps({
 const emit = defineEmits(["update:modelValue"]);
 
 function update() {
-  emit("update:modelValue", !props.modelValue); // Emitting `update:modelValue`
+  emit("update:modelValue", !props.modelValue);
 }
 </script>
 <style lang="scss">
 .inactive-button {
-  background: transparent; // Dynamically set background color
+  background: transparent;
   color: grey;
 }
 
 .active-button {
-  background: rgba($primary, 0.2); // Example inactive background color
-  color: black; // Dynamically set text color for inactive state
+  background: rgba($primary, 0.2);
+  color: black;
 }
 </style>
