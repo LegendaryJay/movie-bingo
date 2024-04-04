@@ -9,7 +9,8 @@
           v-for="(trope, index) in movieTropes"
           :key="index"
           :content="trope"
-          :cell-settings="cellSettings"
+          :cell-settings="cell"
+          :marker-settings="stamp"
           :scale="scale"
         />
       </div>
@@ -24,111 +25,117 @@ import { computed } from "vue";
 const props = defineProps({
   bingoData: {
     type: Object,
-    default: () => ({
-      distortion: {
-        scale: 1,
-      },
-      theme: {
-        global: {
-          size: "150px",
-          backgroundColor: "#2A2D34",
-          lineWidth: "8px",
-          lineColor: "trnsparent",
-          textColor: "#E0FBFC",
-          textFont: "'Segoe UI', Arial, sans-serif",
-          textSize: "18px",
-        },
-        title: {
-          textSize: "40px",
-          backgroundColor: "#227C9D",
-        },
-        cell: {
-          size: "140px",
-          backgroundColor: "#16213E",
-          textSize: "16px",
-          textColor: "#E0FBFC",
-          markerAlpha: 0.6,
-          markerColor: "teal",
-          markerOffset: 0.6,
-          markerSize: 0.65,
-        },
-      },
-      content: {
-        title: "Your Movie Tropes Bingo",
-        cell: [
-          "Chosen One",
-          "Love Triangle",
-          "The Mentor Dies",
-          "Secret Backstory",
-          "Evil Villain Monologue",
-          "The Big Twist",
-          "Unlikely Hero",
-          "Time Loop",
-          "The MacGuffin",
-          "Red Herring",
-          "All Just a Dream",
-          "Deadly Premonition",
-          "Betrayal by Ally",
-          "Final Showdown",
-          "Race Against Time",
-          "Hidden Powers",
-          "Doppelganger",
-          "Forbidden Love",
-          "The Heist",
-          "Undercover Misunderstanding",
-          "Revenge Plot",
-          "Coming of Age",
-          "Tragic Backstory",
-          "Heroic Sacrifice",
-          "Villain's Redemption",
-        ],
-      },
-    }),
+  },
+  scale: {
+    tyle: Number,
+    default: () => 1,
   },
 });
 
-const scale = props.bingoData.distortion.scale;
-const { global, title, cell } = props.bingoData.theme;
-
-// Function to merge theme settings, with specific settings overriding global ones
-function mergeThemeSettings(globalSettings, specificSettings) {
-  return { ...globalSettings, ...specificSettings };
-}
-
-const titleSettings = mergeThemeSettings(global, title);
-const cellSettings = mergeThemeSettings(global, cell);
+const scale = props.scale;
+const { title, cell, line, stamp } = props.bingoData.theme;
 
 const titleText = props.bingoData.content.title;
 const movieTropes = props.bingoData.content.cell;
 
 const titleStyles = computed(() => ({
-  height: `calc(${titleSettings.size} * ${scale})`, // Using global.size for height as per the requirement
-  backgroundColor: titleSettings.backgroundColor,
+  height: `${title.size * scale}px`,
+  backgroundColor: title.backgroundColor,
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
   textAlign: "center",
-  fontSize: `calc(${titleSettings.textSize} * ${scale})`,
-  fontFamily: titleSettings.textFont,
-  color: titleSettings.textColor,
+  fontSize: `${title.textSize * scale}px`,
+  fontFamily: title.font,
+  color: title.textColor,
   boxSizing: "border-box",
   width: `100%`,
-  margin: `0 0 calc(${titleSettings.lineWidth} * ${scale}) 0`,
+  margin: `0 0 calc(${line.size} * ${scale}) 0`,
 }));
 
-const containerStyles = computed(() => ({
-  display: "grid",
-  gridTemplateColumns: "repeat(5, 1fr)",
-  gap: `calc(${cellSettings.lineWidth} * ${scale})`,
-  backgroundColor: cellSettings.lineColor,
-  padding: `calc(${titleSettings.lineWidth} * ${scale})`,
-}));
+const containerStyles = computed(() => {
+  const alphaHex = Math.floor(255 * line.alpha)
+    .toString(16)
+    .padStart(2, "0");
+
+  return {
+    display: "grid",
+    gridTemplateColumns: "repeat(5, 1fr)",
+    gap: `${line.size * scale}px`,
+    backgroundColor: `${line.color + alphaHex}`,
+    padding: `${line.size * scale}px`,
+  };
+});
 
 const boardStyles = computed(() => ({}));
 
 const cardStyles = computed(() => ({
-  padding: `calc(${titleSettings.lineWidth} * ${scale})`,
-  backgroundColor: titleSettings.backgroundColor,
-  padding: `0 calc(30px * ${scale}) calc(30px * ${scale}) calc(30px * ${scale})`,
+  padding: `${line.size * scale}px`,
+  backgroundColor: title.backgroundColor,
+  padding: `0 ${30 * scale}px ${30 * scale}px ${30 * scale}px`,
 }));
 </script>
+
+<!-- {
+  theme: {
+    lines: {
+      alpha: 0.6,
+      size: 8,
+      color: "#FF0000",
+    },
+    title: {
+      color: "#000000",
+      backgroundColor: "#227C9D",
+      bold: false,
+      italic: false,
+      underline: false,
+      font: "Arial",
+      textSize: 40,
+    },
+    cell: {
+      size: 140,
+      bold: false,
+      italic: false,
+      underline: false,
+      backgroundColor: "#16213E",
+      textSize: 16,
+      color: "#E0FBFC",
+      font: "Arial",
+    },
+    stamps: {
+      alpha: 0.6,
+      color: "#16213E",
+      randomOffset: 0.6,
+      size: 0.65,
+    },
+  },
+  content: {
+    title: "Your Movie Tropes Bingo",
+    cell: [
+      "Chosen One",
+      "Love Triangle",
+      "The Mentor Dies",
+      "Secret Backstory",
+      "Evil Villain Monologue",
+      "The Big Twist",
+      "Unlikely Hero",
+      "Time Loop",
+      "The MacGuffin",
+      "Red Herring",
+      "All Just a Dream",
+      "Deadly Premonition",
+      "Betrayal by Ally",
+      "Final Showdown",
+      "Race Against Time",
+      "Hidden Powers",
+      "Doppelganger",
+      "Forbidden Love",
+      "The Heist",
+      "Undercover Misunderstanding",
+      "Revenge Plot",
+      "Coming of Age",
+      "Tragic Backstory",
+      "Heroic Sacrifice",
+      "Villain's Redemption",
+    ],
+  }, -->

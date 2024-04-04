@@ -1,9 +1,9 @@
 <template>
-  <theme-drawer v-model:isVisible="drawer"></theme-drawer>
+  <theme-drawer v-model:isVisible="drawer" :bingoData="settings"></theme-drawer>
   <q-page class="flex flex-center">
     <q-btn @click="toggleDrawer"></q-btn>
 
-    <bingo-board />
+    <bingo-board :bingoData="settings" />
   </q-page>
 </template>
 
@@ -13,11 +13,8 @@ import ThemeDrawer from "src/components/ThemeDrawer.vue";
 import { ref } from "vue";
 
 const settings = ref({
-  distortion: {
-    scale: 1,
-  },
   theme: {
-    lines: {
+    line: {
       alpha: 0.6,
       size: 8,
       color: "#FF0000",
@@ -30,6 +27,7 @@ const settings = ref({
       underline: false,
       font: "Arial",
       textSize: 40,
+      size: 120,
     },
     cell: {
       size: 140,
@@ -41,7 +39,7 @@ const settings = ref({
       color: "#E0FBFC",
       font: "Arial",
     },
-    stamps: {
+    stamp: {
       alpha: 0.6,
       color: "#16213E",
       randomOffset: 0.6,
