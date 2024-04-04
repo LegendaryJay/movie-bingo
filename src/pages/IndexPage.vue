@@ -1,5 +1,5 @@
 <template>
-  <theme-drawer v-model:isVisible="drawer" settings></theme-drawer>
+  <theme-drawer v-model:isVisible="drawer"></theme-drawer>
   <q-page class="flex flex-center">
     <q-btn @click="toggleDrawer"></q-btn>
 
