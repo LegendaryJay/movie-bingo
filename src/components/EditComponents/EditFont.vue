@@ -4,11 +4,11 @@
       <q-btn
         flat
         dense
-        :style="{ color: settings.fontColor, fill: '#ff0000' }"
+        :style="{ color: settings.color, fill: '#ff0000' }"
         icon="format_color_text"
       >
         <q-popup-proxy>
-          <q-color v-model="settings.fontColor"></q-color>
+          <q-color v-model="settings.color"></q-color>
         </q-popup-proxy>
       </q-btn>
       <q-btn
@@ -54,7 +54,7 @@
         class="col-3"
         type="number"
         label="Font Size"
-        v-model="settings.fontSize"
+        v-model="settings.textSize"
       />
     </div>
   </edit-card>
@@ -70,15 +70,6 @@ const fontSelect = ref(null);
 const props = defineProps({
   initialSettings: {
     type: Object,
-    default: () => ({
-      fontColor: "#000000", // Default font color: Black
-      backgroundColor: "#FFFFFF", // Default background color: White
-      bold: false, // Text is not bold by default
-      italic: false, // Text is not italic by default
-      underline: false, // Text is not underlined by default
-      font: "Arial", // Default font family
-      fontSize: 16, // Default font size
-    }),
   },
 });
 
